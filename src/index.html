@@ -46,12 +46,12 @@
       h1 {
         font-size: var(--sl-font-size-2x-large);
         font-weight: var(--sl-font-weight-bold);
-        margin-bottom: 0rem;
+        margin-bottom: 0.5rem;
       }
 
       h2 {
         font-size: var(--sl-font-size-large);
-        font-weight: var(--sl-font-weight-bold);
+        font-weight: var(--sl-font-weight-normal);
         margin-top: 0rem;
         margin-bottom: 2rem;
       }
@@ -213,12 +213,15 @@
         element.addEventListener("drop", (event) => {
           event.preventDefault();
           [...event.dataTransfer.files]
+            // Only accept 1 image file, filter & sliceothers away.
             .filter((file) => ["image/jpeg", "image/png"].includes(file.type))
             .slice(0, 1)
             .forEach((file) => {
               const reader = new FileReader();
               reader.onload = function (event) {
                 element.onload = () => imageLoaded(element);
+                // Clean up old uploaded image
+                URL.revokeObjectURL(element.src);
                 element.src = URL.createObjectURL(file);
               };
               reader.readAsDataURL(file);
@@ -247,6 +250,8 @@
         document
           .querySelectorAll('img[is="image-display-control"]')
           .forEach((imgElement) => {
+            // Clean up old uploaded image
+            URL.revokeObjectURL(imgElement.src);
             imgElement.src = imgElement.dataset.originalSrc;
             imgElement.dataset.disabled = "none";
           });
