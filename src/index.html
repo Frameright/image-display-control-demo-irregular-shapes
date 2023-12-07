@@ -296,6 +296,7 @@
             URL.revokeObjectURL(imgElement.src);
             imgElement.src = imgElement.dataset.originalSrc;
             imgElement.dataset.disabled = "none";
+            handleIdcMetadata(imgElement);
           });
       });
     </script>
