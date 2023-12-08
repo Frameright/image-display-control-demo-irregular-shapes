@@ -175,6 +175,7 @@
     <a href="https://frameright.io">
       <img id="logo" src="images/frameright.svg" alt="" />
     </a>
+
     <main>
       <section>
         <h1>Irregular image containers</h1>
@@ -232,6 +233,13 @@
             This demo shows how you can combine Image Display Control with
             irregularly shaped image containers.
           </h3>
+          <p>
+            <i
+              >The demo is intended for modern browsers. See our
+              <a href="https://docs.frameright.io">Developer portal</a> for
+              polyfills for older browsers.</i
+            >
+          </p>
           <p>
             Not all containers are rectangles. IDC metadata can be used to fit
             image assets into any desired shape. By using IDC metadata regions,
@@ -291,6 +299,13 @@
         </div>
       </section>
     </main>
+
+    <!-- Polyfill for Safari, see https://github.com/ungap/custom-elements -->
+    <script src="https://unpkg.com/@ungap/custom-elements/es.js"></script>
+    <script type="module">
+      import { ResizeObserver } from "https://cdn.pika.dev/@juggle/resize-observer/^3.0.2";
+      window.ResizeObserver = ResizeObserver;
+    </script>
 
     <script
       type="module"
