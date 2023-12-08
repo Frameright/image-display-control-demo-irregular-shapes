@@ -46,6 +46,7 @@
       h1 {
         font-size: var(--sl-font-size-2x-large);
         font-weight: var(--sl-font-weight-bold);
+        margin-top: 6rem;
         margin-bottom: 0.5rem;
       }
 
@@ -56,13 +57,16 @@
         margin-bottom: 2rem;
       }
 
+      h3#power {
+        margin-top: 2rem;
+      }
+
       p {
         font-size: var(--sl-font-size-medium);
         font-weight: var(--sl-font-weight-normal);
         margin-top: 2rem;
         margin-bottom: 2rem;
-        width: 1200px;
-        max-width: 90vw;
+        width: 100%;
       }
 
       main {
@@ -80,7 +84,7 @@
       .image-container {
         position: relative;
         aspect-ratio: 16 / 10;
-        max-height: 60vh;
+        max-height: 90vh;
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
@@ -131,8 +135,38 @@
         height: 100%;
       }
 
+      #controls {
+        width: 100%;
+      }
+
       sl-switch {
         margin-right: 1rem;
+      }
+
+      sl-button {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .text {
+        max-width: 800px;
+        width: 80%;
+        margin-top: 3rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+      }
+
+      ul,
+      ol {
+        font-size: var(--sl-font-size-medium);
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        width: 80%;
+      }
+      li {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
       }
     </style>
   </head>
@@ -172,72 +206,89 @@
             />
           </div>
         </div>
-        <sl-switch
-          id="idc"
-          checked
-          size="medium"
-          style="---width: 20px; --height: 30px; --thumb-size: 26px"
-        >
-          Image Display Control
-        </sl-switch>
-        <sl-switch
-          id="ratio"
-          size="medium"
-          style="---width: 20px; --height: 30px; --thumb-size: 26px"
-        >
-          Mobile view
-        </sl-switch>
-        <sl-button id="reset" variant="default" pill>
-          <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
-          Reset
-        </sl-button>
-        <p>
-          <i
-            ><b>
-              This demo shows how you can combine Image Display Control with
-              irregularly shaped image containers.
-            </b></i
+        <div id="controls">
+          <sl-switch
+            id="idc"
+            checked
+            size="medium"
+            style="---width: 20px; --height: 30px; --thumb-size: 26px"
           >
-        </p>
-        <p>
-          Not all containers are rectangles. IDC metadata can be used to fit
-          image assets into any desired shape. By using IDC metadata regions,
-          you can define the specific area of the image that will be displayed.
-          You can define as many regions as needed. With Frameright's
-          open-source components, you can specify the exact parameters required,
-          we help you to set up a collection with custom overlays.
-        </p>
-        <p>
-          Toggle between the IDC and mobile view buttons to see how the image
-          behaves with and without the IDC metadata and you can also use your
-          own images, follow the steps below to do so:~~
-        </p>
-        <p>
-          Toggle between the IDC and mobile view buttons to see how the image
-          behaves with and without the IDC metadata. You can also use your own
-          images by following the steps below:
-        </p>
-        <ol>
-          <li>Open an image file in the Frameright App.</li>
-          <li>
-            Use the Irregular Shapes - Crop Collections (*Common sizes >
-            Frameright Demo, Irregular Desktop/Mobile Left/Right*).
-          </li>
-          <li>Save the file.</li>
-          <li>
-            Locate the file in your downloads folder and drag and drop it onto
-            the left or right image area.
-          </li>
-        </ol>
-        <h3>Learn more</h3>
-        <ul>
-          <li>Demo source code is available on GitHub</li>
-          <li>Documentation for IDC open-source components and libraries</li>
-          <li>Learn more about about Frameright and Image Display Control</li>
-        </ul>
-        <h2>
-          <b><i>Power to the pictures!</i></b>
-        </h2>
+            Image Display Control
+          </sl-switch>
+          <sl-switch
+            id="ratio"
+            size="medium"
+            style="---width: 20px; --height: 30px; --thumb-size: 26px"
+          >
+            Mobile view </sl-switch
+          ><br />
+          <sl-button id="reset" variant="default" pill>
+            <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+            Reset
+          </sl-button>
+        </div>
+        <div class="text">
+          <h3>
+            This demo shows how you can combine Image Display Control with
+            irregularly shaped image containers.
+          </h3>
+          <p>
+            Not all containers are rectangles. IDC metadata can be used to fit
+            image assets into any desired shape. By using IDC metadata regions,
+            you can define the specific region of the image that will be
+            displayed and you choose which region to show in different
+            situations. You can define as many regions as needed.
+          </p>
+          <p>
+            Toggle between the IDC and mobile view buttons to see how the image
+            behaves with and without the IDC metadata. You can also test it with
+            your own images by following the steps below:
+          </p>
+          <ol>
+            <li>
+              Open an image file in
+              <a href="https://frameright.app">Frameright</a>.
+            </li>
+            <li>
+              Use the irregular shapes definitions:
+              <i>
+                Common sizes > Frameright Demo > Irregular Desktop/Mobile
+                Left/Right.</i
+              >
+            </li>
+            <li>Save the file.</li>
+            <li>
+              Locate the file in your downloads folder and drag and drop it onto
+              the left or right image area.
+            </li>
+          </ol>
+          <h3>Learn more</h3>
+          <ul>
+            <li>
+              Demo
+              <a
+                href="https://github.com/Frameright/image-display-control-demo-irregular-shapes"
+                >source code</a
+              >
+              is available on GitHub
+            </li>
+            <li>
+              Documentation for IDC open-source components and libraries is
+              available on the
+              <a href="https://docs.frameright.io/"
+                >Frameright developer portal</a
+              >
+            </li>
+            <li>
+              Learn more about about
+              <a href="https://www.frameright.io/">Frameright</a> and
+              <a href="https://www.frameright.io/idc">Image Display Control</a>
+            </li>
+          </ul>
+          <h3 id="power">
+            <b><i>Power to the pictures!</i></b>
+          </h3>
+        </div>
       </section>
     </main>
 
