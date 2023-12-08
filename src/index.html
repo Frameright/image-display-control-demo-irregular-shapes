@@ -165,14 +165,26 @@
 
       #controls {
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media (max-width: 768px) {
+        #controls {
+          justify-content: left;
+        }
       }
 
       sl-switch {
         margin-right: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
       }
 
       sl-button {
-        margin-top: 1rem;
+        margin-top: 0.5rem;
         margin-bottom: 1rem;
       }
 
