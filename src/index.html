@@ -73,14 +73,15 @@
         min-height: 90vh;
         min-width: 90vw;
         margin-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .image-container {
         position: relative;
         aspect-ratio: 16 / 10;
-        width: 1200px;
-        max-width: 90vw;
-        max-height: 40vh;
+        max-height: 60vh;
+        max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         display: flex;
@@ -92,9 +93,8 @@
 
       .image-container.mobile {
         aspect-ratio: 177 / 316;
-        width: unset;
-        height: 800px;
-        max-height: 90vh;
+        max-height: 60vh;
+        max-width: 400px;
       }
 
       .image-container div {
@@ -192,37 +192,46 @@
           Reset
         </sl-button>
         <p>
-          This demo shows how you can combine Image Display Control with
-          irregularly shaped image containers. The IDC metadata makes it easy to
-          control which area of the image gets shown. You can also define
-          multiple different regions in the image and use them for different
-          containers. For example in this demo, the images contain distinct
-          control instructions for the left and the right frame for both desktop
-          and mobile views.
-        </p>
-        <p>
-          You can try it out yourself by adding IDC regions to your image on
-          <a href="https://frameright.app">Frameright</a>. Once you've opened
-          your file in Frameright, you can find the regions used in this demo by
-          going to <b><i>Common sizes > Frameright Demo</i></b> and choosing
-          <b><i>Irregular Desktop/Mobile Left/Right</i></b
-          >. Once you've defined the regions and saved the file to your
-          computer, you can upload it by dropping it over the left or right
-          image area.
-        </p>
-        <p>
-          The
-          <a
-            href="https://github.com/Frameright/image-display-control-demo-irregular-shapes"
-            >source code of this demo</a
+          <i
+            ><b>
+              This demo shows how you can combine Image Display Control with
+              irregularly shaped image containers.
+            </b></i
           >
-          is available on Github. You can read more about Frameright on
-          <a href="https://frameright.io">our website</a>, where you can also
-          find more information about
-          <a href="https://frameright.io/idc">Image Display Control</a>. The
-          documentation for our open source components and libraries is
-          available on our
-          <a href="https://docs.frameright.io/">Developer Portal.</a>
+        </p>
+        <p>
+          Not all containers are rectangles. IDC metadata can be used to fit
+          image assets into any desired shape. By using IDC metadata regions,
+          you can define the specific area of the image that will be displayed.
+          You can define as many regions as needed. With Frameright's
+          open-source components, you can specify the exact parameters required,
+          we help you to set up a collection with custom overlays.
+        </p>
+        <p>
+          Toggle between the IDC and mobile view buttons to see how the image
+          behaves with and without the IDC metadata and you can also use your
+          own images, follow the steps below to do so:~~
+        </p>
+        <p>
+          Toggle between the IDC and mobile view buttons to see how the image
+          behaves with and without the IDC metadata. You can also use your own
+          images by following the steps below:
+        </p>
+        <ol>
+          <li>Open an image file in the Frameright App.</li>
+          <li>
+            Use the Irregular Shapes - Crop Collections (*Common sizes >
+            Frameright Demo, Irregular Desktop/Mobile Left/Right*).
+          </li>
+          <li>Save the file.</li>
+          <li>
+            Locate the file in your downloads folder and drag and drop it onto
+            the left or right image area.
+          </li>
+        </ol>
+        <p>
+          Learn more: Demo source code The documentation for our open source
+          Lear more about Frameright and Image Display Control
         </p>
         <h2>
           <b><i>Power to the pictures!</i></b>
@@ -253,12 +262,15 @@
       }
 
       function updatePreferredRegion(element, regions) {
+        // Find if we want desktop or mobile region definition
         const preferredRegionDefinition = document.querySelector("#ratio")
           .checked
           ? element.dataset.regionDefinitionNameMobile
           : element.dataset.regionDefinitionNameDesktop;
         // Find region with preferred region definition name and update the
-        // image region id data attribute with the preferred region id
+        // image region id data attribute with the preferred region id.
+        // For the demo we accept the first region that includes "Desktop Left" or "Desktop Right"
+        // or "Mobile Left" or "Mobile Right", depending on the image container.
         const preferredRegion = regions.find((region) =>
           region.idcRegionDefinitionName.includes(preferredRegionDefinition)
         );
@@ -328,6 +340,8 @@
           document
             .querySelectorAll('img[is="image-display-control"]')
             .forEach((imgElement) => {
+              // Container has changed in size, so we need to update the
+              // preferred region
               updatePreferredRegion(
                 imgElement,
                 JSON.parse(imgElement.dataset.imageRegions)
@@ -344,10 +358,10 @@
           .forEach((imgElement) => {
             // Clean up old uploaded image
             URL.revokeObjectURL(imgElement.src);
+            // Retrigger IDC metadata parsing
+            imgElement.onload = () => handleIdcMetadata(imgElement);
             imgElement.src = imgElement.dataset.originalSrc;
             imgElement.dataset.disabled = "none";
-            // Retrigger IDC metadata parsing to get correct preferred region
-            handleIdcMetadata(imgElement);
           });
       });
     </script>
