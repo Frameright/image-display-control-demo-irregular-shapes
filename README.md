@@ -12,6 +12,8 @@
 
 _The demo is intended for modern browsers. See our [Developer portal](https://docs.frameright.io) for polyfills for older browsers._
 
+<img src="https://irregular-shapes-demo.frameright.io/images/OG_IrregularImagesDemo.png"/>
+
 Not all containers are rectangles. IDC metadata can be used to fit image assets into any desired shape. By using IDC metadata regions, you can define the specific region of the image that will be displayed and you choose which region to show in different situations. You can define as many regions as needed.
 
 Toggle between the IDC and mobile view buttons to see how the image behaves with and without the IDC metadata. You can also test it with your own images by following the steps below:
